@@ -12,7 +12,7 @@ public class IAdministrador extends JFrame implements ActionListener{
 
         buscarButton = new JButton("Buscar Unidades");
         registrarButton  = new JButton("Registrar Unidad");
-        consultarButton = new JButton("Visualizar reporte");
+        consultarButton = new JButton("Visualizar Reporte");
         add(buscarButton);
         add(registrarButton);
         add(consultarButton);
