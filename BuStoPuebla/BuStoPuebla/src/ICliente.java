@@ -5,21 +5,21 @@ import java.util.ArrayList;
 
 public class ICliente extends JFrame implements ActionListener{
     private JMenu rutasFavMenu;
-    private JMenuItem verRuta, queja, salir, rutaFavLabel;
+    private JMenuItem verRuta, infoRuta, queja, salir, rutaFavLabel;
     private JPanel rutasPanel;
     private JLabel rutaLabel;
-    private String[] rutas = {"Ruta1", "Ruta2", "Ruta3", "Ruta4"};
+    private JScrollPane scrollPane;
+    private String[] rutas = {"Ruta1", "Ruta2", "Ruta3", "Ruta4", "Ruta5", "Ruta6"};
     private ArrayList<String> rutasFav = new ArrayList<>();
 
-    public ICliente(){
+    public Cliente(){
         super("Cliente");
-        setLayout(new FlowLayout());
-        setSize(500, 500);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+        setLayout(new BorderLayout());
+
         JMenuBar menuBar = new JMenuBar();
         JMenu menuPrincipal = new JMenu("Opciones");
         verRuta = new JMenuItem("Ver Ruta");
+        infoRuta = new JMenuItem("Más información");
         queja = new JMenuItem("Reportar Queja");
         salir = new JMenuItem("Salir");
 
@@ -27,6 +27,8 @@ public class ICliente extends JFrame implements ActionListener{
 
         menuPrincipal.add(verRuta);
         verRuta.addActionListener(this);
+        menuPrincipal.add(infoRuta);
+        infoRuta.addActionListener(this);
         menuPrincipal.add(queja);
         queja.addActionListener(this);
         menuPrincipal.add(salir);
@@ -39,6 +41,9 @@ public class ICliente extends JFrame implements ActionListener{
         rutasPanel = new JPanel();
         rutasPanel.setLayout(new GridLayout(0, 2, 10, 10));
         add(rutasPanel, BorderLayout.CENTER);
+
+        scrollPane = new JScrollPane(rutasPanel);
+        add(scrollPane, BorderLayout.CENTER);
 
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -53,6 +58,8 @@ public class ICliente extends JFrame implements ActionListener{
             quejar();
         }else if(event.getSource() == salir){
             volver();
+        }else if(event.getSource() == infoRuta){
+            new RutasInfo();
         }
     }
     public void mostrarRuta(){
@@ -78,7 +85,7 @@ public class ICliente extends JFrame implements ActionListener{
         rutasPanel.repaint();
     }
     public void volver(){
-        //Sería volver al login
+        System.exit(0);
     }
     public void quejar(){
         System.out.println("Reportando queja...");
@@ -100,4 +107,4 @@ public class ICliente extends JFrame implements ActionListener{
         rutasFav.remove(ruta);
         menuFavActualizar();
     }
-} 
+}
