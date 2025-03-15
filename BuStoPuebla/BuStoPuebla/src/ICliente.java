@@ -19,7 +19,7 @@ public class ICliente extends JFrame implements ActionListener{
         JMenuBar menuBar = new JMenuBar();
         JMenu menuPrincipal = new JMenu("Opciones");
         verRuta = new JMenuItem("Ver Ruta");
-        infoRuta = new JMenuItem("Más información");
+        infoRuta = new JMenuItem("Más Información");
         queja = new JMenuItem("Reportar Queja");
         salir = new JMenuItem("Salir");
 
