@@ -121,8 +121,4 @@ class RegistroUsuario extends JFrame implements ActionListener {
             registrarUsuario();
         }
     }
-
-    public static void main(String[] args) {
-        new RegistroUsuario(); // Inicia la ventana de registro
-    }
 }
