@@ -8,7 +8,7 @@ class InicioSesion extends JFrame implements ActionListener {
     private JTextField usuarioField;
     private JPasswordField passwordField;
     private JRadioButton administrador, estudiante, conductor;
-    private JButton inicioButton;
+    private JButton inicioButton, registroButton;
 
     public InicioSesion() {
         setTitle("Login Form");
@@ -67,6 +67,12 @@ class InicioSesion extends JFrame implements ActionListener {
         add(inicioButton, gbc);
         inicioButton.addActionListener(this);
 
+        gbc.gridy = 5;
+        registroButton = new JButton("Registrarse");
+        registroButton.setBackground(Color.BLUE);
+        add(registroButton, gbc);
+        registroButton.addActionListener(this);
+
         setVisible(true);
     }
 
@@ -113,18 +119,16 @@ class InicioSesion extends JFrame implements ActionListener {
             verificarCredenciales();
             if (tipoUsuario != null) { // Asegúrate de que el tipo de usuario no sea nulo
                 if (tipoUsuario.equals("Administrador")) {
-                    new IAdministrador(); // Abre la interfaz del administrador
+                    new Administrador(); // Abre la interfaz del administrador
                 } else if (tipoUsuario.equals("Estudiante")) {
-                    new ICliente(); // Abre la interfaz del estudiante
+                    new Cliente(); // Abre la interfaz del estudiante
                 } else if (tipoUsuario.equals("Conductor")) {
-                    new IConductor();
+                    new Conductor();
                 }
                 this.dispose();
              }
+        } else if(e.getSource() == registroButton){
+            new RegistroUsuario();
         }
     }
 }
-
-
-
-
