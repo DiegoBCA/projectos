@@ -9,13 +9,11 @@ public class IConductor extends JFrame {
     private JTextArea reportTextArea;
 
     public IConductor() {
-        // Configuración del frame
         setTitle("Estado y Reporte del Conductor");
         setSize(600, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        // Crear componentes
         JLabel statusLabel = new JLabel("Estado del Conductor:");
         statusTextArea = new JTextArea();
         statusTextArea.setEditable(false);
@@ -29,7 +27,6 @@ public class IConductor extends JFrame {
         reportTextArea.setLineWrap(true);
         reportTextArea.setWrapStyleWord(true);
 
-        // Layout de componentes
         JPanel statusPanel = new JPanel(new BorderLayout());
         JPanel reportPanel = new JPanel(new BorderLayout());
         JPanel buttonPanel = new JPanel(new FlowLayout());
@@ -46,7 +43,6 @@ public class IConductor extends JFrame {
         add(reportPanel, BorderLayout.SOUTH);
         add(buttonPanel, BorderLayout.NORTH);
 
-        // Añadir ActionListener a los botones
         statusButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
