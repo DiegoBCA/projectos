@@ -22,7 +22,7 @@ class Usuario {
     }
 
     public void consultarCosto() {
-        JOptionPane.showMessageDialog(null, "El costo del viaje es: $50.00");
+        JOptionPane.showMessageDialog(null, "El costo del viaje es: $10.00");
     }
 
     public void reservarAsiento() {
