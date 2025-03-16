@@ -80,8 +80,4 @@ public class IUsuario extends JFrame implements ActionListener {
             usuario.guardarTransporte();
         }
     }
-
-    public static void main(String[] args) {
-        new IUsuario();
-    }
 }
