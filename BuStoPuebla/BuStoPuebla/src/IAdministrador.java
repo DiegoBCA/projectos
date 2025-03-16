@@ -33,10 +33,4 @@ public class IAdministrador extends JFrame implements ActionListener{
     public void buscar(){
         new RutasInfo;
     }
-    public void registrar(){
-
-    }
-    public void consultar(){
-        
-    }
 }
