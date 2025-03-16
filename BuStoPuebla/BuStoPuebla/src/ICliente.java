@@ -90,7 +90,7 @@ public class Cliente extends JFrame implements ActionListener{
         rutasPanel.repaint();
     }
     public void volver(){
-        System.exit(0);
+        new InicioSesion();
     }
     public void quejar(){
         System.out.println("Reportando queja...");
