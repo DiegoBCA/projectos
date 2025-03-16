@@ -34,6 +34,6 @@ public class Administrador extends JFrame implements ActionListener{
 
     }
     public void consultar(){
-        
+        new RutasInfo();
     }
 }
