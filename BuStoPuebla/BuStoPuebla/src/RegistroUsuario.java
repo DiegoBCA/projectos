@@ -105,7 +105,6 @@ class RegistroUsuario extends JFrame implements ActionListener {
             return;
         }
 
-        // Aquí puedes agregar la lógica para guardar el usuario en una base de datos o un archivo
         JOptionPane.showMessageDialog(this, "Registro exitoso para " + tipoUsuario + ": " + nombre, "Éxito", JOptionPane.INFORMATION_MESSAGE);
         this.dispose(); // Cierra la ventana de registro
     }
