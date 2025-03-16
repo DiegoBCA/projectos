@@ -3,16 +3,16 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-public class ICliente extends JFrame implements ActionListener{
+public class Cliente extends JFrame implements ActionListener{
     private JMenu rutasFavMenu;
-    private JMenuItem verRuta, infoRuta, queja, salir, rutaFavLabel;
+    private JMenuItem verRuta, infoRuta, queja, salir, rutaFavLabel, usuario;
     private JPanel rutasPanel;
     private JLabel rutaLabel;
     private JScrollPane scrollPane;
-    private String[] rutas = {"Ruta1", "Ruta2", "Ruta3", "Ruta4", "Ruta5", "Ruta6"};
+    private String[] rutas = {"Ruta1", "Ruta2", "Ruta3", "Ruta4", "Ruta5"};
     private ArrayList<String> rutasFav = new ArrayList<>();
 
-    public ICliente(){
+    public Cliente(){
         super("Cliente");
         setLayout(new BorderLayout());
 
@@ -22,6 +22,7 @@ public class ICliente extends JFrame implements ActionListener{
         infoRuta = new JMenuItem("Más Información");
         queja = new JMenuItem("Reportar Queja");
         salir = new JMenuItem("Salir");
+        usuario = new JMenuItem("Opciones de Usuario");
 
         rutasFavMenu = new JMenu("Rutas Favoritas");
 
@@ -33,6 +34,8 @@ public class ICliente extends JFrame implements ActionListener{
         queja.addActionListener(this);
         menuPrincipal.add(salir);
         salir.addActionListener(this);
+        menuPrincipal.add(usuario);
+        usuario.addActionListener(this);
 
         menuBar.add(menuPrincipal);
         menuBar.add(rutasFavMenu);
@@ -60,6 +63,8 @@ public class ICliente extends JFrame implements ActionListener{
             volver();
         }else if(event.getSource() == infoRuta){
             new RutasInfo();
+        }else if(event.getSource() == usuario){
+            new IUsuario();
         }
     }
     public void mostrarRuta(){
