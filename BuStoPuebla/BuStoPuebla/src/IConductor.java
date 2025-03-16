@@ -8,7 +8,7 @@ public class IConductor extends JFrame {
     private JTextArea statusTextArea;
     private JTextArea reportTextArea;
 
-    public Conductor() {
+    public IConductor() {
         // Configuración del frame
         setTitle("Estado y Reporte del Conductor");
         setSize(600, 400);
