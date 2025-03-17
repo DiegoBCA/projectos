@@ -117,7 +117,7 @@ class RegistroUsuario extends JFrame implements ActionListener {
         } else if (e.getSource() == conductor) {
             tipoUsuario = "Conductor";
         } else if (e.getSource() == registroButton) {
-            new RegistroEstudiante();
+            registrarUsuario();
         }
     }
 }
