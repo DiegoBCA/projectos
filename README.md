@@ -18,3 +18,5 @@ Descripción breve: La BUAP administra servicios de transporte privado para los 
 deben poder realizar consultas de los horarios, retrasos, rutas y costos por medio de una sola plataforma web. Se podrán agregar quejas sobre la experincia y autobuses. 
 --------------------------------------------------------------------------------------------------
 ---Santiago Aldana---
+Postata: yo realicé la interfaz de usuario y adminstrador. Además, uní las otras interfaces relacionadas a las mías y realicé ligeros cambios a otras interfaces
+---------------------------------------------------------------------------------------------------
