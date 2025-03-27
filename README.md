@@ -1,8 +1,13 @@
 BuStoPuebla
+
+Integrantes: 
+
 ● Identicación del problema:
 Estudiantes y trabajadores de la BUAP han presentado reiteradamente su inconformidad con
 respecto a falta de organización, así como el acceso a la información sobre las unidades de
 transporte y su disposición.
+
+
 1. Información General
 Nombre del caso de uso: BuStoPuebla
 Versión: 1.0
