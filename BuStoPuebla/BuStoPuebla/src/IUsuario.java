@@ -2,12 +2,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-class Usuario {
+class IUsuario {
     private String nombre;
     private int id;
     private String correo;
 
-    public Usuario(String nombre, int id, String correo) {
+    public IUsuario(String nombre, int id, String correo) {
         this.nombre = nombre;
         this.id = id;
         this.correo = correo;
