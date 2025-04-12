@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-public class Cliente extends JFrame implements ActionListener{
+public class ICliente extends JFrame implements ActionListener{
     private JMenu rutasFavMenu;
     private JMenuItem verRuta, infoRuta, queja, salir, rutaFavLabel, usuario;
     private JPanel rutasPanel;
@@ -12,7 +12,7 @@ public class Cliente extends JFrame implements ActionListener{
     private String[] rutas = {"Ruta1", "Ruta2", "Ruta3", "Ruta4", "Ruta5"};
     private ArrayList<String> rutasFav = new ArrayList<>();
 
-    public Cliente(){
+    public ICliente(){
         super("Cliente");
         setLayout(new BorderLayout());
 
