@@ -4,14 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
 
-public class IConductor extends JFrame {
+public class IConductor extends JPanel {
     private JTextArea statusTextArea;
     private JTextArea reportTextArea;
 
     public IConductor() {
-        setTitle("Estado y Reporte del Conductor");
-        setSize(600, 400);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
         JLabel statusLabel = new JLabel("Estado del Conductor:");
@@ -43,6 +40,7 @@ public class IConductor extends JFrame {
         add(reportPanel, BorderLayout.SOUTH);
         add(buttonPanel, BorderLayout.NORTH);
 
+        // Acción para el botón "Ver Estado"
         statusButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -50,11 +48,17 @@ public class IConductor extends JFrame {
             }
         });
 
+        // Acción para el botón "Reportar Accidente"
         accidentButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                reportTextArea.setText("Accidente reportado el " + LocalDateTime.now() +
-                                       "\nDetalles: [Descripción del accidente]");
+                String detalles = JOptionPane.showInputDialog("Ingrese detalles del accidente:");
+                if (detalles != null && !detalles.trim().isEmpty()) {
+                    reportTextArea.setText("Accidente reportado el " + LocalDateTime.now() +
+                                           "\nDetalles: " + detalles);
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se ingresaron detalles del accidente.");
+                }
             }
         });
     }
