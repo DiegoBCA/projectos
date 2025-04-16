@@ -43,7 +43,7 @@ public class BuscarRegistroEnc implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent evento) {
-        String numero = campos[0].getText();
+        String numero = campos[2].getText();
 
         if (numero.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Debe ingresar el ID el autobus para buscar.");
