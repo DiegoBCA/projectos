@@ -2,15 +2,31 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-class IUsuario {
-    private String nombre;
-    private int id;
-    private String correo;
+class IUsuario extends JFrame implements ActionListener{
+    JButton ubicacionButton, paradasButton, costoButton, reservaButton;
 
-    public IUsuario(String nombre, int id, String correo) {
-        this.nombre = nombre;
-        this.id = id;
-        this.correo = correo;
+    public IUsuario(){
+        super("Interfaz de Usuario");
+        setLayout(new FlowLayout());
+        setSize(400, 300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        ubicacionButton = new JButton("Consultar Ubicación");
+        paradasButton = new JButton("Consultar Paradas");
+        costoButton = new JButton("Consultar Costo");
+        reservaButton = new JButton("Reservar Asiento");
+
+        add(ubicacionButton);
+        add(paradasButton);
+        add(costoButton);
+        add(reservaButton);
+
+        ubicacionButton.addActionListener(this);
+        paradasButton.addActionListener(this);
+        costoButton.addActionListener(this);
+        reservaButton.addActionListener(this);
+
+        setVisible(true);
     }
 
     public void consultarUbicacion() {
@@ -32,52 +48,15 @@ class IUsuario {
     public void guardarTransporte() {
         JOptionPane.showMessageDialog(null, "Transporte guardado en favoritos.");
     }
-}
-
-public class IUsuario extends JFrame implements ActionListener {
-    JButton ubicacionButton, paradasButton, costoButton, reservaButton, guardarButton;
-    Usuario usuario;
-
-    public IUsuario() {
-        super("Interfaz de Usuario");
-        setLayout(new FlowLayout());
-        setSize(400, 300);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        usuario = new Usuario("Juan Pérez", 101, "juan.perez@example.com");
-
-        ubicacionButton = new JButton("Consultar Ubicación");
-        paradasButton = new JButton("Consultar Paradas");
-        costoButton = new JButton("Consultar Costo");
-        reservaButton = new JButton("Reservar Asiento");
-        guardarButton = new JButton("Guardar Transporte");
-
-        add(ubicacionButton);
-        add(paradasButton);
-        add(costoButton);
-        add(reservaButton);
-        add(guardarButton);
-
-        ubicacionButton.addActionListener(this);
-        paradasButton.addActionListener(this);
-        costoButton.addActionListener(this);
-        reservaButton.addActionListener(this);
-        guardarButton.addActionListener(this);
-
-        setVisible(true);
-    }
-
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == ubicacionButton) {
-            usuario.consultarUbicacion();
+            consultarUbicacion();
         } else if (event.getSource() == paradasButton) {
-            usuario.consultarParadas();
+            consultarParadas();
         } else if (event.getSource() == costoButton) {
-            usuario.consultarCosto();
+            consultarCosto();
         } else if (event.getSource() == reservaButton) {
-            usuario.reservarAsiento();
-        } else if (event.getSource() == guardarButton) {
-            usuario.guardarTransporte();
+            reservarAsiento();
         }
     }
 }
