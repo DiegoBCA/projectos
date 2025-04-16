@@ -31,7 +31,7 @@ class InicioSesion extends JPanel {
             frameRegistro.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frameRegistro.setSize(500, 500);
             frameRegistro.setLocationRelativeTo(null);
-            frameRegistro.setContentPane(new RegistroUsuario(frameRegistro)); 
+            frameRegistro.setContentPane(new IRegistroUsuario(frameRegistro)); 
             frameRegistro.setVisible(true);
         });
         add(botonRegistrar);
