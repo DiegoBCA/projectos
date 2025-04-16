@@ -12,7 +12,7 @@ public class Ayuda implements ActionListener {
         "   - Ingrese el ID.\n" +
         "   - Presione 'Buscar'.\n\n" +
         "3. Para ACTUALIZAR un registro:\n" +
-        "   - Ingrese nombre y apellido para localizar al contacto.\n" +
+        "   - Ingrese ID para localizar al contacto.\n" +
         "   - Actualice los demás campos y presione 'Actualizar'.\n\n" +
         "4. Para LIMPIAR el formulario:\n" +
         "   - Presione el botón 'Limpiar'.\n\n" +
