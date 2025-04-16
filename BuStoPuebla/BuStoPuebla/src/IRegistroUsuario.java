@@ -1,6 +1,6 @@
 import javax.swing.*;
 
-public class RegistroUsuario {
+public class IRegistroUsuario {
     public static void main(String[] args) {
         JFrame ventana = new JFrame("📘 Agenda de Direcciones (SQLite)");
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
