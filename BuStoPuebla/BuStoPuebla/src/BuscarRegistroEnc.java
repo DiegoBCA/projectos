@@ -59,16 +59,16 @@ public class BuscarRegistroEnc implements ActionListener {
                 ResultSet resultado = stmt.executeQuery();
 
                 if (resultado.next()) {
-                    campos[1].setText(resultado.getString("firstname")); // first name
-                    campos[2].setText(resultado.getString("lastname")); // last name
-                    campos[3].setText(resultado.getString("busnumber")); // bus number
-                    campos[4].setText(resultado.getString("license"));
-                    campos[5].setText(resultado.getString("route"));
-                    campos[6].setText(resultado.getString("plate"));
-                    campos[7].setText(resultado.getString("schedule"));
-                    campos[8].setText(resultado.getString("toll"));
-                    campos[9].setText(resultado.getString("salary"));
-                    campos[10].setText(resultado.getString("complaints"));
+                    campos[0].setText(resultado.getString("firstname")); // first name
+                    campos[1].setText(resultado.getString("lastname")); // last name
+                    campos[2].setText(resultado.getString("busnumber")); // bus number
+                    campos[3].setText(resultado.getString("license"));
+                    campos[4].setText(resultado.getString("route"));
+                    campos[5].setText(resultado.getString("plate"));
+                    campos[6].setText(resultado.getString("schedule"));
+                    campos[7].setText(resultado.getString("toll"));
+                    campos[8].setText(resultado.getString("salary"));
+                    campos[9].setText(resultado.getString("complaints"));
                     JOptionPane.showMessageDialog(null, "✅ Registro encontrado.");
                 } else {
                     JOptionPane.showMessageDialog(null, "⚠️ No se encontró ningún registro con ese ID.");
