@@ -63,7 +63,7 @@ public class AgregarRegistroEnc implements ActionListener {
                 // Ejecutar la inserción
                 int filasInsertadas = stmt.executeUpdate();
                 if (filasInsertadas > 0) {
-                    JOptionPane.showMessageDialog(null, "Registro agregado con ID del autobus encriptado.");
+                    JOptionPane.showMessageDialog(null, "Registro agregado.");
                 } else {
                     JOptionPane.showMessageDialog(null, " No se pudo agregar el registro.");
                 }
