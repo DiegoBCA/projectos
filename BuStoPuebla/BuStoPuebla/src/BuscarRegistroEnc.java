@@ -61,7 +61,6 @@ public class BuscarRegistroEnc implements ActionListener {
                 if (resultado.next()) {
                     campos[0].setText(resultado.getString("firstname")); // first name
                     campos[1].setText(resultado.getString("lastname")); // last name
-                    campos[2].setText(resultado.getString("busnumber")); // bus number
                     campos[3].setText(resultado.getString("license"));
                     campos[4].setText(resultado.getString("route"));
                     campos[5].setText(resultado.getString("plate"));
