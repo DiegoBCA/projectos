@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GestionQuejas {
-    private static final String DB_URL = "jdbc:sqlite:bin/Quejas.db";
+    private static final String DB_URL = "jdbc:sqlite:Quejas.db";
     public static void insertarQueja(String usuario, String queja) {
         String sql = "INSERT INTO Quejas(usuario, queja) VALUES(?, ?)";
 
