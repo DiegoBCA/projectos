@@ -49,7 +49,7 @@ public class ICliente extends JFrame implements ActionListener{
         add(scrollPane, BorderLayout.CENTER);
 
         setSize(400, 300);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         setLocationRelativeTo(null);
         setVisible(true);
 
