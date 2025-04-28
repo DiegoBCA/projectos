@@ -9,6 +9,7 @@ import java.sql.*;
 
 public class AdminTest {
     private BuscarRegistroEnc buscarRegistro;
+    private AgregarRegistroEnc agregarRegistro;
     private JTextField[] campos;
 
     @Before
@@ -21,7 +22,7 @@ public class AdminTest {
     }
 
     @Test
-    public void testActionPerformedCampoVacio() {
+    public void buscarCampoVacio() {
         campos[2].setText(""); 
         try {
             buscarRegistro.actionPerformed(null);
@@ -31,7 +32,7 @@ public class AdminTest {
     }
 
     @Test
-    public void testActionPerformedCampoConValor() {
+    public void buscarCampoValor() {
         campos[2].setText("12345");
         try {
             buscarRegistro.actionPerformed(null);
@@ -41,7 +42,7 @@ public class AdminTest {
     }
 
     @Test
-    public void testActionPerformedSQLException() {
+    public void testSQLException() {
         campos[2].setText("12345");  
         try {
             Connection conexion = DriverManager.getConnection("jdbc:sqlite:administrador.db");
@@ -52,7 +53,7 @@ public class AdminTest {
     }
 
     @Test
-    public void testActionPerformedRegistroNoEncontrado() throws SQLException {
+    public void testRegistroNoEncontrado() throws SQLException {
         campos[2].setText("12345");
         try (Connection conexion = DriverManager.getConnection("jdbc:sqlite:administrador.db")) {
             String sql = "SELECT * FROM addresses WHERE busnumber = ?";
@@ -70,7 +71,7 @@ public class AdminTest {
     }
 
     @Test
-    public void testActionPerformedRegistroEncontrado() throws SQLException {
+    public void testRegistroEncontrado() throws SQLException {
         campos[2].setText("12345"); 
 
         try (Connection conexion = DriverManager.getConnection("jdbc:sqlite:administrador.db")) {
@@ -88,6 +89,32 @@ public class AdminTest {
             }
         } catch (SQLException e) {
             fail("Se produjo un error inesperado en la base de datos: " + e.getMessage());
+        }
+    }
+    @Before
+    public void setUp2() {
+        campos = new JTextField[10];
+        for (int i = 0; i < campos.length; i++) {
+            campos[i] = new JTextField();
+        }
+        agregarRegistro = new AgregarRegistroEnc(campos);
+    }
+    @Test
+    public void agregarVacio() throws SQLException{
+        campos[2].setText(""); 
+        try {
+            agregarRegistro.actionPerformed(null);
+        } catch (Exception e) {
+            fail("No se esperaba ninguna excepción, pero ocurrió: " + e.getMessage());
+        }
+    }
+    @Test
+    public void agregarValor() throws SQLException{
+        campos[2].setText("1234"); 
+        try {
+            agregarRegistro.actionPerformed(null);
+        } catch (Exception e) {
+            fail("No se esperaba ninguna excepción, pero ocurrió: " + e.getMessage());
         }
     }
 }
