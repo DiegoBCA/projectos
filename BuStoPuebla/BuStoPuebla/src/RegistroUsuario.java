@@ -8,18 +8,53 @@ import java.sql.ResultSet;
 import javax.swing.*;
 
 class RegistroUsuario extends JPanel {
-    private final JTextField nombreField;
-    private final JTextField apellidosField;
-    private final JTextField correoField;
+    private final JTextField nombreField,apellidosField,correoField;
     private final JPasswordField contraseñaField;
     private final JRadioButton[] radio;
     private final ButtonGroup grupoUsuarios;
     private final String[] radioEtiquetas = { "Administrador", "Cliente", "Conductor" };
     //Damos forma a la ventana de registro de usuario
     public RegistroUsuario(JFrame frameRegistro) {
-        setLayout(new GridLayout(8, 2, 5, 5));
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        add(new JLabel("Tipo de Usuario:"));
+        
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        add(new JLabel("Nombre:"),gbc);
+        gbc.gridx = 1;
+        nombreField = new JTextField(25);
+        add(nombreField,gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        add(new JLabel("Apellidos:"),gbc);
+        gbc.gridx = 1;
+        apellidosField = new JTextField(25);
+        add(apellidosField,gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        add(new JLabel("Correo Electrónico:"),gbc);
+        gbc.gridx = 1;
+        correoField = new JTextField(25);
+        add(correoField,gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        add(new JLabel("Contraseña:"),gbc);
+        contraseñaField = new JPasswordField(25);
+        gbc.gridx = 1;
+        add(contraseñaField,gbc);
+        // Botón para agregar el registro
+       
+        
+        JButton botonAgregar = new JButton("Agregar");
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+       
+        add(new JLabel("Tipo de Usuario:"),gbc);
         JPanel panelRadios = new JPanel(new FlowLayout(FlowLayout.LEFT));
         radio = new JRadioButton[radioEtiquetas.length];
         grupoUsuarios = new ButtonGroup();
@@ -29,25 +64,8 @@ class RegistroUsuario extends JPanel {
             grupoUsuarios.add(radio[i]);
             panelRadios.add(radio[i]);
         }
-        add(panelRadios);
-
-        add(new JLabel("Nombre:"));
-        nombreField = new JTextField(25);
-        add(nombreField);
-
-        add(new JLabel("Apellidos:"));
-        apellidosField = new JTextField(25);
-        add(apellidosField);
-
-        add(new JLabel("Correo Electrónico:"));
-        correoField = new JTextField(25);
-        add(correoField);
-
-        add(new JLabel("Contraseña:"));
-        contraseñaField = new JPasswordField(25);
-        add(contraseñaField);
-        // Botón para agregar el registro
-        JButton botonAgregar = new JButton("Agregar");
+        gbc.gridx = 1;
+        add(panelRadios,gbc);
         botonAgregar.addActionListener(e -> {
             String tipoUsuario = null;
             for (JRadioButton rb : radio) {
@@ -107,6 +125,17 @@ class RegistroUsuario extends JPanel {
             frameLogin.setContentPane(new InicioSesion(frameLogin));
             frameLogin.setVisible(true);
         });
-        add(botonAgregar);
+        add(botonAgregar,gbc);
+        JButton botonRegresar=new JButton("Regresar");
+        botonRegresar.addActionListener(e -> {
+            frameRegistro.dispose();
+            JFrame frameLogin = new JFrame("Inicio de Sesión");
+            frameLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frameLogin.setSize(300, 200);
+            frameLogin.setLocationRelativeTo(null);
+            frameLogin.setContentPane(new InicioSesion(frameLogin));
+            frameLogin.setVisible(true);
+        });
+        add(botonRegresar,gbc);
     }
 }
