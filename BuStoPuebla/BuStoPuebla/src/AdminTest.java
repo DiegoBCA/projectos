@@ -1,16 +1,19 @@
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
+
+import org.junit.Before;
+import org.junit.Test;
 import javax.swing.*;
 import java.sql.*;
 
-public class BuscarRegistroEncTest {
+public class AdminTest {
     private BuscarRegistroEnc buscarRegistro;
     private JTextField[] campos;
 
-    @BeforeEach
+    @Before
     public void setUp() {
-        campos = new JTextField[10]; // 10 campos como en el código original
+        campos = new JTextField[10];
         for (int i = 0; i < campos.length; i++) {
             campos[i] = new JTextField();
         }
@@ -19,9 +22,9 @@ public class BuscarRegistroEncTest {
 
     @Test
     public void testActionPerformedCampoVacio() {
-        campos[2].setText("");  // Campo número de bus vacío
+        campos[2].setText(""); 
         try {
-            buscarRegistro.actionPerformed(null);  // Ejecutar el método
+            buscarRegistro.actionPerformed(null);
         } catch (Exception e) {
             fail("No se esperaba ninguna excepción, pero ocurrió: " + e.getMessage());
         }
@@ -29,9 +32,9 @@ public class BuscarRegistroEncTest {
 
     @Test
     public void testActionPerformedCampoConValor() {
-        campos[2].setText("12345");  // Campo número de bus con valor
+        campos[2].setText("12345");
         try {
-            buscarRegistro.actionPerformed(null);  // Ejecutar el método
+            buscarRegistro.actionPerformed(null);
         } catch (Exception e) {
             fail("No se esperaba ninguna excepción, pero ocurrió: " + e.getMessage());
         }
@@ -39,13 +42,9 @@ public class BuscarRegistroEncTest {
 
     @Test
     public void testActionPerformedSQLException() {
-        // Simulamos un error de conexión a la base de datos directamente
-        campos[2].setText("12345");  // Campo con valor
-
-        // Modificamos el método 'actionPerformed' para lanzar una excepción de SQLException.
+        campos[2].setText("12345");  
         try {
             Connection conexion = DriverManager.getConnection("jdbc:sqlite:administrador.db");
-            // Simulamos un error de SQL, lo que debería disparar el bloque catch
             throw new SQLException("Error de conexión");
         } catch (SQLException e) {
             assertTrue(e.getMessage().contains("Error de conexión"));
@@ -54,16 +53,14 @@ public class BuscarRegistroEncTest {
 
     @Test
     public void testActionPerformedRegistroNoEncontrado() throws SQLException {
-        campos[2].setText("12345");  // Campo con valor
-
-        // Simulamos que la consulta no encuentra ningún registro.
+        campos[2].setText("12345");
         try (Connection conexion = DriverManager.getConnection("jdbc:sqlite:administrador.db")) {
             String sql = "SELECT * FROM addresses WHERE busnumber = ?";
             try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
                 stmt.setString(1, "12345");
                 ResultSet resultado = stmt.executeQuery();
 
-                if (!resultado.next()) {  // Si no hay resultados, lanzamos el mensaje de error
+                if (!resultado.next()) { 
                     JOptionPane.showMessageDialog(null, "⚠️ No se encontró ningún registro con ese ID.");
                 }
             }
@@ -74,19 +71,17 @@ public class BuscarRegistroEncTest {
 
     @Test
     public void testActionPerformedRegistroEncontrado() throws SQLException {
-        campos[2].setText("12345");  // Campo con valor
+        campos[2].setText("12345"); 
 
-        // Simulamos que la consulta encuentra un registro.
         try (Connection conexion = DriverManager.getConnection("jdbc:sqlite:administrador.db")) {
             String sql = "SELECT * FROM addresses WHERE busnumber = ?";
             try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
                 stmt.setString(1, "12345");
                 ResultSet resultado = stmt.executeQuery();
 
-                if (resultado.next()) {  // Si se encuentra un registro
+                if (resultado.next()) { 
                     campos[0].setText(resultado.getString("firstname"));
                     campos[1].setText(resultado.getString("lastname"));
-                    // Aquí simulamos la actualización de los campos
                     assertNotNull(campos[0].getText());
                     assertNotNull(campos[1].getText());
                 }
