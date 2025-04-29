@@ -25,8 +25,8 @@ public class AgregarRegistroTest {
             stmt.executeUpdate();
             System.out.println("Se elimino todo lo de al base");
         } catch (SQLException e) {
-            System.err.println("Error setting up the test: " + e.getMessage());
-            fail("Error setting up the test: " + e.getMessage());
+            System.err.println("Error no se conecto con la base " + e.getMessage());
+            fail("Error no se conecto con la base " + e.getMessage());
         }
     }
 
