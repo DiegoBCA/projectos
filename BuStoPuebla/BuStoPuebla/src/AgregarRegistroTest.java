@@ -48,7 +48,7 @@ public class AgregarRegistroTest {
         System.out.println("Test registro valido");
         
         String[] testData = {
-            "user",
+            "cliente",
             "Santiago",
             "dos",
             "santy@gmail.com",
@@ -129,7 +129,7 @@ public class AgregarRegistroTest {
         System.out.println("Test correo duplicado");
        
         String[] testData1 = {
-            "user",
+            "cliente",
             "Santiago",
             "dos",
             "santy@gmail.com",
@@ -137,7 +137,7 @@ public class AgregarRegistroTest {
         };
 
         String[] testData2 = {
-            "user",
+            "cliente",
             "alexis",
             "uno",
             "alexis@gmail.com",
@@ -185,7 +185,7 @@ public class AgregarRegistroTest {
         System.out.println("Test contraseña encriptada");
       
         String[] testData = {
-            "user",
+            "cliente",
             "Santiago",
             "dos",
             "santy@gmail.com",
