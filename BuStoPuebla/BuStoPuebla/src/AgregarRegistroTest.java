@@ -46,7 +46,7 @@ public class AgregarRegistroTest {
     @Test
     public void testAgregarRegistroValido() {
         System.out.println("Test registro valido");
-        // Test data
+        
         String[] testData = {
             "user",
             "Santiago",
@@ -60,7 +60,7 @@ public class AgregarRegistroTest {
             campos[i] = new JTextField(testData[i]);
         }
 
-        // Create an instance of JFrame if needed
+
         JFrame registroFrame = new JFrame();
         AgregarRegistro agregarRegistro = new AgregarRegistro(campos, registroFrame);
         agregarRegistro.actionPerformed(null);
@@ -100,7 +100,7 @@ public class AgregarRegistroTest {
             campos[i] = new JTextField(testData[i]);
         }
 
-        // Create an instance of JFrame if needed
+
         JFrame registroFrame = new JFrame();
         AgregarRegistro agregarRegistro = new AgregarRegistro(campos, registroFrame);
         agregarRegistro.actionPerformed(null);
@@ -127,7 +127,7 @@ public class AgregarRegistroTest {
     @Test
     public void testAgregarRegistroConCorreoDuplicado() {
         System.out.println("Test correo duplicado");
-        // Test data
+       
         String[] testData1 = {
             "user",
             "Santiago",
@@ -183,7 +183,7 @@ public class AgregarRegistroTest {
     @Test
     public void testAgregarRegistroConContrasenaEncriptada() {
         System.out.println("Test contraseña encriptada");
-        // Test data
+      
         String[] testData = {
             "user",
             "Santiago",
@@ -197,7 +197,7 @@ public class AgregarRegistroTest {
             campos[i] = new JTextField(testData[i]);
         }
 
-        // Create an instance of JFrame if needed
+  
         JFrame registroFrame = new JFrame();
         AgregarRegistro agregarRegistro = new AgregarRegistro(campos, registroFrame);
         agregarRegistro.actionPerformed(null);
