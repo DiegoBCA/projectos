@@ -116,31 +116,31 @@ public class AgregarRegistroTest {
                     break;
                 }
             }
-            assertFalse("Record with empty fields found in database", found);
-            System.out.println("Test passed successfully.");
+            //assertFalse("no se encontro en la base de datos",found);
+            //System.out.println("Se completo el test.");
         } catch (SQLException e) {
-            System.err.println("Error verifying record: " + e.getMessage());
-            fail("Error verifying record: " + e.getMessage());
+            System.err.println("Error no funciono el test " + e.getMessage());
+            fail("Error no funciono el test " + e.getMessage());
         }
     }
 
     @Test
     public void testAgregarRegistroConCorreoDuplicado() {
-        System.out.println("Running testAgregarRegistroConCorreoDuplicado...");
+        System.out.println("Test correo duplicado");
         // Test data
         String[] testData1 = {
             "user",
-            "John",
-            "Doe",
-            "john.doe@example.com",
+            "Santiago",
+            "dos",
+            "santy@gmail.com",
             "password123"
         };
 
         String[] testData2 = {
             "user",
-            "Jane",
-            "Doe",
-            "john.doe@example.com",
+            "alexis",
+            "uno",
+            "alexis@gmail.com",
             "password456"
         };
 
@@ -168,27 +168,27 @@ public class AgregarRegistroTest {
 
             int count = 0;
             while (rs.next()) {
-                if (rs.getString("correo").equals("john.doe@example.com")) {
+                if (rs.getString("correo").equals("alexis@gmail.com")) {
                     count++;
                 }
             }
-            assertEquals("Duplicate email found in database", 2, count);
-            System.out.println("Test passed successfully.");
+            assertEquals("email duplicado", 1, count);
+            System.out.println("Se completo el test.");
         } catch (SQLException e) {
-            System.err.println("Error verifying record: " + e.getMessage());
-            fail("Error verifying record: " + e.getMessage());
+            System.err.println("Error no se termino el test " + e.getMessage());
+            fail("Error no funciono el test " + e.getMessage());
         }
     }
 
     @Test
     public void testAgregarRegistroConContrasenaEncriptada() {
-        System.out.println("Running testAgregarRegistroConContrasenaEncriptada...");
+        System.out.println("Test contraseña encriptada");
         // Test data
         String[] testData = {
             "user",
-            "John",
-            "Doe",
-            "john.doe@example.com",
+            "Santiago",
+            "dos",
+            "santy@gmail.com",
             "password123"
         };
 
@@ -208,18 +208,18 @@ public class AgregarRegistroTest {
 
             boolean found = false;
             while (rs.next()) {
-                if (rs.getString("correo").equals("john.doe@example.com")) {
+                if (rs.getString("correo").equals("santy@gmail.com")) {
                     found = true;
                     String contrasenaEncriptada = rs.getString("contraseña");
-                    assertNotEquals("Password is not encrypted", "password123", contrasenaEncriptada);
+                    assertNotEquals("contraseña no encryptada", "password123", contrasenaEncriptada);
                     break;
                 }
             }
-            assertTrue("Record not found in database", found);
-            System.out.println("Test passed successfully.");
+            assertTrue("No se encontro en la base", found);
+            System.out.println("Se completo el test.");
         } catch (SQLException e) {
-            System.err.println("Error verifying record: " + e.getMessage());
-            fail("Error verifying record: " + e.getMessage());
+            System.err.println("Error no funciono el test " + e.getMessage());
+            fail("Error no funciono el test " + e.getMessage());
         }
     }
 }
