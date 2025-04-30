@@ -171,6 +171,28 @@ public class AdminTest {
             fail("No se esperaba ninguna excepción, pero ocurrió: " + e.getMessage());
         }
     }
+    @Test
+    public void idRepetido() {
+        campos[0].setText("Juan");
+        campos[1].setText("López");  
+        campos[2].setText("IDREPETIDO");
+        campos[3].setText("licencia1"); 
+        campos[4].setText("Ruta1");
+        campos[5].setText("Placa1");
+        campos[6].setText("9:00-12:00");
+        campos[7].setText("$10");
+        campos[8].setText("$210/d");
+        campos[9].setText("-"); 
+        try {
+            agregarRegistro.actionPerformed(null);
+        } catch (Exception e) {
+            fail("No se esperaba ninguna excepción, pero ocurrió: " + e.getMessage());
+        }try {
+            agregarRegistro.actionPerformed(null);
+        } catch (Exception e) {
+            fail("ID repetido: " + e.getMessage());
+        }
+    }
 
     @Test
     public void limpiarCampos(){
