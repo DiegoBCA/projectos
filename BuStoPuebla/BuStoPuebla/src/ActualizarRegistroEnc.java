@@ -69,7 +69,7 @@ public class ActualizarRegistroEnc implements ActionListener {
                 stmt.setString(1, campos[0].getText()); // firstname
                 stmt.setString(2, campos[1].getText()); // lastname
                 for (int i = 3; i < campos.length; i++) {
-                    stmt.setString(i+1, campos[i].getText()); // license en adelante
+                    stmt.setString(i, campos[i].getText()); // license en adelante
                 }
                 // Criterios de búsqueda: ID encriptado
                 stmt.setString(10, encriptarSHA256(numero));
