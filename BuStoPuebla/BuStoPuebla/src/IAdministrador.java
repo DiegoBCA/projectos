@@ -25,10 +25,9 @@ public IAdministrador() {
     panelBotones = new PanelControl(panelDatos.obtenerCampos());
 
     // Añadir botón de búsqueda extra
-    buscarButton = new JButton("Buscar Unidades");
+    buscarButton = new JButton("Reporte");
     buscarButton.addActionListener(this);
-    panelBotones.add(buscarButton);  // Añadir a los botones ya existentes
-
+    panelBotones.add(buscarButton);  
     add(panelBotones, BorderLayout.SOUTH);
 
     setVisible(true);
@@ -42,6 +41,6 @@ public IAdministrador() {
     }
 
     public void buscar() {
-        new RutasInfo();
+        new IUsuario();
     }
 }
