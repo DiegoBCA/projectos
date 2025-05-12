@@ -81,10 +81,10 @@ public class IUsuario extends JFrame implements ActionListener {
         }
 
         JOptionPane.showMessageDialog(null,
-                "📍 Ruta: " + rutaSeleccionada +
-                "\n👤 Conductor: " + conductor +
-                "\n🕒 Horario: " + horario +
-                "\n💲 Peaje: " + peaje);
+                " Ruta: " + rutaSeleccionada +
+                "\n Conductor: " + conductor +
+                "\n Horario: " + horario +
+                "\n Peaje: " + peaje);
     }
 
     public void consultarParadas() {
