@@ -4,9 +4,9 @@ import javax.swing.*;
 
 public class IAdministrador extends JFrame implements ActionListener {
 
-JButton buscarButton;
-PanelDesplazable panelDatos;
-PanelControl panelBotones;
+private JButton buscarButton;
+private PanelDesplazable panelDatos;
+private PanelControl panelBotones;
 
 public IAdministrador() {
     super("Administrador");
