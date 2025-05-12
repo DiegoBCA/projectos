@@ -5,8 +5,8 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class IUsuario extends JFrame implements ActionListener {
-    JButton ubicacionButton, paradasButton, costoButton, reservaButton;
-    String rutaSeleccionada;
+    private JButton ubicacionButton, paradasButton, costoButton, reservaButton;
+    private String rutaSeleccionada;
 
     public IUsuario() {
         super("Interfaz de Usuario");
