@@ -45,11 +45,11 @@ public class IUsuario extends JFrame implements ActionListener {
                 }
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "❌ Error al obtener rutas: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, " Error al obtener rutas: " + e.getMessage());
         }
 
         if (rutas.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "⚠️ No hay rutas disponibles en la base de datos.");
+            JOptionPane.showMessageDialog(null, " No hay rutas disponibles en la base de datos.");
             return null;
         }
 
@@ -71,12 +71,12 @@ public class IUsuario extends JFrame implements ActionListener {
                     horario = rs.getString("schedule");
                     peaje = rs.getString("toll");
                 } else {
-                    JOptionPane.showMessageDialog(null, "⚠️ No se encontró información para esta ruta.");
+                    JOptionPane.showMessageDialog(null, " No se encontró información para esta ruta.");
                     return;
                 }
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "❌ Error al consultar la base de datos: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, " Error al consultar la base de datos: " + e.getMessage());
             return;
         }
 
@@ -89,7 +89,7 @@ public class IUsuario extends JFrame implements ActionListener {
 
     public void consultarParadas() {
         if (rutaSeleccionada != null) {
-            JOptionPane.showMessageDialog(null, "📍 Mostrando paradas cercanas para la ruta: " + rutaSeleccionada);
+            JOptionPane.showMessageDialog(null, " Mostrando paradas cercanas para la ruta: " + rutaSeleccionada);
         }
     }
 
@@ -106,15 +106,15 @@ public class IUsuario extends JFrame implements ActionListener {
                 }
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "❌ Error al consultar costo: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al consultar costo: " + e.getMessage());
         }
 
-        JOptionPane.showMessageDialog(null, "💰 El costo de la ruta " + rutaSeleccionada + " es: $" + peaje);
+        JOptionPane.showMessageDialog(null, " El costo de la ruta " + rutaSeleccionada + " es: $" + peaje);
     }
 
     public void reservarAsiento() {
         if (rutaSeleccionada != null) {
-            JOptionPane.showMessageDialog(null, "✅ Asiento reservado exitosamente para la ruta: " + rutaSeleccionada);
+            JOptionPane.showMessageDialog(null, " Asiento reservado exitosamente para la ruta: " + rutaSeleccionada);
         }
     }
 
