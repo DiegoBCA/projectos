@@ -22,5 +22,7 @@ deben poder realizar consultas de los horarios, retrasos, rutas y costos por med
 --------------------------------------------------------------------------------------------------
 ---Santiago Aldana---
 Postata: yo realicé la interfaz de usuario y adminstrador. Además, uní las otras interfaces relacionadas a las mías y realicé ligeros cambios a otras interfaces
----------------------------------------------------------------------------------------------------
-
+--------------------------------------------------------------------------------------------------
+=======
+---Edy---
+Realice los cambios al IAdministrador para adaptarlo, basandome en el archivo "agenda direcciones" que compartio el profesor. 
