@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import javax.swing.JTextField;
 import javax.swing.JFrame;
 
@@ -19,207 +20,132 @@ public class AgregarRegistroTest {
 
     @Before
     public void setUp() {
-        System.out.println("test inicado");
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement stmt = conn.prepareStatement(SQL_DELETE_ALL)) {
             stmt.executeUpdate();
-            System.out.println("Se elimino todo lo de al base");
         } catch (SQLException e) {
-            System.err.println("Error no se conecto con la base " + e.getMessage());
-            fail("Error no se conecto con la base " + e.getMessage());
+            fail("No se pudo limpiar la base antes del test: " + e.getMessage());
         }
     }
 
     @After
     public void tearDown() {
-        System.out.println("test finalizado");
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement stmt = conn.prepareStatement(SQL_DELETE_ALL)) {
             stmt.executeUpdate();
-            System.out.println("Base de datos limpia");
         } catch (SQLException e) {
-            System.err.println("Error al terminar el test" + e.getMessage());
-            fail("Error al terminar el test" + e.getMessage());
+            fail("No se pudo limpiar la base después del test: " + e.getMessage());
         }
     }
 
     @Test
     public void testAgregarRegistroValido() {
-        System.out.println("Test registro valido");
-        
-        String[] testData = {
-            "cliente",
-            "Santiago",
-            "dos",
-            "santy@gmail.com",
-            "password123"
-        };
-
-        JTextField[] campos = new JTextField[testData.length];
-        for (int i = 0; i < testData.length; i++) {
-            campos[i] = new JTextField(testData[i]);
+        String[] datos = {"cliente", "Santiago", "dos", "santy@gmail.com", "password123"};
+        JTextField[] campos = new JTextField[datos.length];
+        for (int i = 0; i < datos.length; i++) {
+            campos[i] = new JTextField(datos[i]);
         }
 
-
-        JFrame registroFrame = new JFrame();
-        AgregarRegistro agregarRegistro = new AgregarRegistro(campos, registroFrame);
-        agregarRegistro.actionPerformed(null);
+        JFrame frame = new JFrame();
+        new AgregarRegistro(campos, frame).actionPerformed(null);
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement stmt = conn.prepareStatement(SQL_SELECT_ALL);
              ResultSet rs = stmt.executeQuery()) {
 
-            boolean found = false;
+            boolean encontrado = false;
             while (rs.next()) {
                 if (rs.getString("correo").equals("santy@gmail.com")) {
-                    found = true;
+                    encontrado = true;
                     break;
                 }
             }
-            assertTrue("no se encontro en a base", found);
-            System.out.println("Test completado.");
+            assertTrue("No se insertó el registro válido", encontrado);
         } catch (SQLException e) {
-            System.err.println("Error no se completo el test " + e.getMessage());
-            fail("Error no se completo el test " + e.getMessage());
+            fail("Error al verificar el registro válido: " + e.getMessage());
         }
     }
 
     @Test
     public void testAgregarRegistroConCamposVacios() {
-        System.out.println("test registro vacio");
-        String[] testData = {
-            "",
-            "",
-            "",
-            "",
-            ""
-        };
-
-        JTextField[] campos = new JTextField[testData.length];
-        for (int i = 0; i < testData.length; i++) {
-            campos[i] = new JTextField(testData[i]);
+        String[] vacios = {"", "", "", "", ""};
+        JTextField[] campos = new JTextField[vacios.length];
+        for (int i = 0; i < vacios.length; i++) {
+            campos[i] = new JTextField(vacios[i]);
         }
 
-
-        JFrame registroFrame = new JFrame();
-        AgregarRegistro agregarRegistro = new AgregarRegistro(campos, registroFrame);
-        agregarRegistro.actionPerformed(null);
+        JFrame frame = new JFrame();
+        new AgregarRegistro(campos, frame).actionPerformed(null); // no debe insertar
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement stmt = conn.prepareStatement(SQL_SELECT_ALL);
              ResultSet rs = stmt.executeQuery()) {
 
-            boolean found = false;
-            while (rs.next()) {
-                if (rs.getString("correo").equals("")) {
-                    found = true;
-                    break;
-                }
-            }
-            //assertFalse("no se encontro en la base de datos",found);
-            //System.out.println("Se completo el test.");
+            boolean hayRegistros = rs.next();
+            assertFalse("Se insertó un registro con campos vacíos", hayRegistros);
+
         } catch (SQLException e) {
-            System.err.println("Error no funciono el test " + e.getMessage());
-            fail("Error no funciono el test " + e.getMessage());
+            fail("Error al verificar campos vacíos: " + e.getMessage());
         }
     }
 
     @Test
     public void testAgregarRegistroConCorreoDuplicado() {
-        System.out.println("Test correo duplicado");
-       
-        String[] testData1 = {
-            "cliente",
-            "Santiago",
-            "dos",
-            "santy@gmail.com",
-            "password123"
-        };
+        String[] datos1 = {"cliente", "Santiago", "uno", "alexis@gmail.com", "clave123"};
+        String[] datos2 = {"cliente", "Alexis", "dos", "alexis@gmail.com", "otraClave"};
 
-        String[] testData2 = {
-            "cliente",
-            "alexis",
-            "uno",
-            "alexis@gmail.com",
-            "password456"
-        };
-
-        JTextField[] campos1 = new JTextField[testData1.length];
-        for (int i = 0; i < testData1.length; i++) {
-            campos1[i] = new JTextField(testData1[i]);
+        JTextField[] campos1 = new JTextField[datos1.length];
+        JTextField[] campos2 = new JTextField[datos2.length];
+        for (int i = 0; i < datos1.length; i++) {
+            campos1[i] = new JTextField(datos1[i]);
+            campos2[i] = new JTextField(datos2[i]);
         }
 
-        JTextField[] campos2 = new JTextField[testData2.length];
-        for (int i = 0; i < testData2.length; i++) {
-            campos2[i] = new JTextField(testData2[i]);
-        }
-
-        // Create an instance of JFrame if needed
-        JFrame registroFrame = new JFrame();
-        AgregarRegistro agregarRegistro1 = new AgregarRegistro(campos1, registroFrame);
-        agregarRegistro1.actionPerformed(null);
-
-        AgregarRegistro agregarRegistro2 = new AgregarRegistro(campos2, registroFrame);
-        agregarRegistro2.actionPerformed(null);
+        JFrame frame = new JFrame();
+        new AgregarRegistro(campos1, frame).actionPerformed(null); // válido
+        new AgregarRegistro(campos2, frame).actionPerformed(null); // duplicado → ignorado
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
-             PreparedStatement stmt = conn.prepareStatement(SQL_SELECT_ALL);
-             ResultSet rs = stmt.executeQuery()) {
+             PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(*) FROM usuarios WHERE correo = ?")) {
 
-            int count = 0;
-            while (rs.next()) {
-                if (rs.getString("correo").equals("alexis@gmail.com")) {
-                    count++;
-                }
-            }
-            assertEquals("email duplicado", 1, count);
-            System.out.println("Se completo el test.");
+            stmt.setString(1, "alexis@gmail.com");
+            ResultSet rs = stmt.executeQuery();
+
+            int count = rs.next() ? rs.getInt(1) : 0;
+            assertEquals("Se permitió más de un registro con el mismo correo", 1, count);
+
         } catch (SQLException e) {
-            System.err.println("Error no se termino el test " + e.getMessage());
-            fail("Error no funciono el test " + e.getMessage());
+            fail("Error al verificar correo duplicado: " + e.getMessage());
         }
     }
 
     @Test
     public void testAgregarRegistroConContrasenaEncriptada() {
-        System.out.println("Test contraseña encriptada");
-      
-        String[] testData = {
-            "cliente",
-            "Santiago",
-            "dos",
-            "santy@gmail.com",
-            "password123"
-        };
-
-        JTextField[] campos = new JTextField[testData.length];
-        for (int i = 0; i < testData.length; i++) {
-            campos[i] = new JTextField(testData[i]);
+        String[] datos = {"cliente", "Santiago", "dos", "santy@gmail.com", "password123"};
+        JTextField[] campos = new JTextField[datos.length];
+        for (int i = 0; i < datos.length; i++) {
+            campos[i] = new JTextField(datos[i]);
         }
 
-  
-        JFrame registroFrame = new JFrame();
-        AgregarRegistro agregarRegistro = new AgregarRegistro(campos, registroFrame);
-        agregarRegistro.actionPerformed(null);
+        JFrame frame = new JFrame();
+        new AgregarRegistro(campos, frame).actionPerformed(null);
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement stmt = conn.prepareStatement(SQL_SELECT_ALL);
              ResultSet rs = stmt.executeQuery()) {
 
-            boolean found = false;
+            boolean encontrado = false;
             while (rs.next()) {
                 if (rs.getString("correo").equals("santy@gmail.com")) {
-                    found = true;
-                    String contrasenaEncriptada = rs.getString("contraseña");
-                    assertNotEquals("contraseña no encryptada", "password123", contrasenaEncriptada);
+                    encontrado = true;
+                    String guardada = rs.getString("contraseña");
+                    assertNotEquals("La contraseña fue guardada sin encriptar", "password123", guardada);
                     break;
                 }
             }
-            assertTrue("No se encontro en la base", found);
-            System.out.println("Se completo el test.");
+            assertTrue("No se encontró el registro para verificar la contraseña", encontrado);
         } catch (SQLException e) {
-            System.err.println("Error no funciono el test " + e.getMessage());
-            fail("Error no funciono el test " + e.getMessage());
+            fail("Error al verificar contraseña: " + e.getMessage());
         }
     }
 }
