@@ -17,8 +17,10 @@ public class ICliente extends JFrame implements ActionListener {
         super("Cliente");
         setLayout(new BorderLayout());
 
+        // Menú
         JMenuBar menuBar = new JMenuBar();
         JMenu menuPrincipal = new JMenu("Opciones");
+
         verRuta = new JMenuItem("Ver Ruta");
         queja = new JMenuItem("Reportar Queja");
         salir = new JMenuItem("Salir");
@@ -27,18 +29,20 @@ public class ICliente extends JFrame implements ActionListener {
         rutasFavMenu = new JMenu("Rutas Favoritas");
 
         menuPrincipal.add(verRuta);
-        verRuta.addActionListener(this);
         menuPrincipal.add(queja);
-        queja.addActionListener(this);
         menuPrincipal.add(salir);
-        salir.addActionListener(this);
         menuPrincipal.add(usuario);
+
+        verRuta.addActionListener(this);
+        queja.addActionListener(this);
+        salir.addActionListener(this);
         usuario.addActionListener(this);
 
         menuBar.add(menuPrincipal);
         menuBar.add(rutasFavMenu);
         setJMenuBar(menuBar);
 
+        // Panel principal de rutas
         rutasPanel = new JPanel();
         rutasPanel.setLayout(new GridLayout(0, 2, 10, 10));
         scrollPane = new JScrollPane(rutasPanel);
@@ -62,10 +66,11 @@ public class ICliente extends JFrame implements ActionListener {
                 }
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "❌ Error al cargar rutas: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al cargar rutas: " + e.getMessage());
         }
     }
 
+    @Override
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == verRuta) {
             mostrarRuta();
@@ -84,7 +89,7 @@ public class ICliente extends JFrame implements ActionListener {
             rutaLabel = new JLabel(ruta);
             boolean esFavorita = rutasFav.contains(ruta);
             JToggleButton toggleButton = new JToggleButton(esFavorita ? "Guardado" : "Guardar", esFavorita);
-    
+
             toggleButton.addItemListener(e -> {
                 if (toggleButton.isSelected()) {
                     agregarFav(ruta);
@@ -94,14 +99,26 @@ public class ICliente extends JFrame implements ActionListener {
                     toggleButton.setText("Guardar");
                 }
             });
-    
+
             rutasPanel.add(rutaLabel);
             rutasPanel.add(toggleButton);
         }
         rutasPanel.revalidate();
         rutasPanel.repaint();
     }
-    
+
+    public void quejar() {
+        System.out.println("Abriendo ventana de quejas...");
+        JFrame frameQuejas = new JFrame("Enviar Queja o Sugerencia");
+        frameQuejas.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frameQuejas.setSize(500, 350);
+        frameQuejas.setLocationRelativeTo(this);
+
+        PanelQuejasSugerencias panel = new PanelQuejasSugerencias();
+        frameQuejas.setContentPane(panel);
+
+        frameQuejas.setVisible(true);
+    }
 
     public void volver() {
         JFrame ventana = new JFrame("Inicio de Sesión");
@@ -112,10 +129,6 @@ public class ICliente extends JFrame implements ActionListener {
         ventana.setContentPane(panelInicio);
         ventana.setVisible(true);
         this.dispose();
-    }
-
-    public void quejar() {
-        System.out.println("Reportando queja...");
     }
 
     public void menuFavActualizar() {

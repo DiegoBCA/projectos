@@ -1,9 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 public class PanelVerQuejas extends JPanel {
     private JTextArea areaQuejas;
+    private JButton actualizarBtn;
+    private JButton regresarBtn;
 
     public PanelVerQuejas() {
         setLayout(new BorderLayout());
@@ -20,18 +24,36 @@ public class PanelVerQuejas extends JPanel {
         JScrollPane scrollPane = new JScrollPane(areaQuejas);
         add(scrollPane, BorderLayout.CENTER);
 
-        JButton actualizarBtn = new JButton("Actualizar Lista");
-        actualizarBtn.addActionListener(e -> cargarQuejas());
-        add(actualizarBtn, BorderLayout.SOUTH);
+        JPanel botonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        actualizarBtn = new JButton("Actualizar Lista");
+        regresarBtn = new JButton("Regresar");
 
-        cargarQuejas();
+        actualizarBtn.addActionListener(e -> cargarQuejas());
+
+        regresarBtn.addActionListener(e -> {
+            Window ventana = SwingUtilities.getWindowAncestor(PanelVerQuejas.this);
+            if (ventana != null) ventana.dispose();
+        });
+
+        botonPanel.add(actualizarBtn);
+        botonPanel.add(regresarBtn);
+        add(botonPanel, BorderLayout.SOUTH);
+
+        cargarQuejas(); 
     }
 
     private void cargarQuejas() {
         List<String> quejas = GestionQuejas.obtenerQuejas();
         areaQuejas.setText("");
+
         for (String q : quejas) {
-            areaQuejas.append(q + "\n\n");
+            String[] partes = q.split("\\|");
+            if (partes.length == 2) {
+                areaQuejas.append("Ruta: " + partes[0].replace("Ruta:", "").trim() + "\n");
+                areaQuejas.append("Queja: " + partes[1].replace("Queja:", "").trim() + "\n\n");
+            } else {
+                areaQuejas.append("• " + q + "\n\n"); 
+            }
         }
     }
 }

@@ -19,6 +19,7 @@ public class IConductor extends JPanel {
 
         JButton statusButton = new JButton("Ver Estado");
         JButton accidentButton = new JButton("Reportar Accidente");
+        JButton verQuejasButton = new JButton("Ver Quejas");
         reportTextArea = new JTextArea();
         reportTextArea.setEditable(false);
         reportTextArea.setLineWrap(true);
@@ -35,6 +36,7 @@ public class IConductor extends JPanel {
 
         buttonPanel.add(statusButton);
         buttonPanel.add(accidentButton);
+        buttonPanel.add(verQuejasButton);
 
         add(statusPanel, BorderLayout.CENTER);
         add(reportPanel, BorderLayout.SOUTH);
@@ -59,6 +61,18 @@ public class IConductor extends JPanel {
                 } else {
                     JOptionPane.showMessageDialog(null, "No se ingresaron detalles del accidente.");
                 }
+            }
+        });
+
+        verQuejasButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = new JFrame("Lista de Quejas y Sugerencias");
+                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                frame.setSize(400, 300);
+                frame.setLocationRelativeTo(null);
+                frame.add(new PanelVerQuejas()); // asegúrate de que PanelVerQuejas esté en tu proyecto
+                frame.setVisible(true);
             }
         });
     }
