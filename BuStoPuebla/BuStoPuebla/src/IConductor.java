@@ -71,7 +71,7 @@ public class IConductor extends JPanel {
                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 frame.setSize(400, 300);
                 frame.setLocationRelativeTo(null);
-                frame.add(new PanelVerQuejas()); // asegúrate de que PanelVerQuejas esté en tu proyecto
+                frame.add(new PanelVerQuejas()); 
                 frame.setVisible(true);
             }
         });
