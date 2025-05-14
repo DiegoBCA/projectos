@@ -5,6 +5,15 @@ import java.util.List;
 public class GestionQuejas {
     private static final String DB_URL = "jdbc:sqlite:Quejas.db";
     public static void insertarQueja(String usuario, String queja) {
+        if (usuario == null || usuario.trim().isEmpty()) {
+            System.out.println("No se guardó la queja: usuario vacío.");
+            return;
+        }
+        if (queja == null || queja.trim().isEmpty()) {
+            System.out.println("No se guardó la queja: mensaje vacío.");
+            return;
+        }
+
         String sql = "INSERT INTO Quejas(usuario, queja) VALUES(?, ?)";
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
@@ -35,4 +44,4 @@ public class GestionQuejas {
         }
         return lista;
     }
-}
+} 

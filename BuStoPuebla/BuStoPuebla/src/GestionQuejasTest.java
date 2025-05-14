@@ -42,9 +42,9 @@ public class GestionQuejasTest {
     public void insertarQuejaVacia() {
         GestionQuejas.insertarQueja("", "");
         List<String> quejas = GestionQuejas.obtenerQuejas();
-        assertEquals(1, quejas.size());  // Asumiendo que aún se guarda aunque esté vacía
-        assertEquals("", quejas.get(0));
+        assertEquals(0, quejas.size());
     }
+
 
     @Test
     public void obtenerQuejasConMultiplesEntradas() {
